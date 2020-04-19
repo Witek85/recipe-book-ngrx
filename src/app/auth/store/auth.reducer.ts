@@ -1,6 +1,5 @@
-// import { Ingredient } from '../../shared/ingredient.model';
-// import * as ShoppingListActions from './shopping-list.actions';
 import { User } from '../user.model';
+import * as AuthActions from './auth.actions';
 
 export interface State {
   user: User;
@@ -12,55 +11,25 @@ const initialState: State = {
 
 export function authReducer(
   state: State = initialState,
-  action
+  action: AuthActions.AuthActions
 ) {
-//   switch (action.type) {
-//     case ShoppingListActions.ADD_INGREDIENT:
-//       return {
-//         ...state,
-//         ingredients: [...state.ingredients, action.payload]
-//       };
-//     case ShoppingListActions.ADD_INGREDIENTS:
-//       return {
-//         ...state,
-//         ingredients: [...state.ingredients, ...action.payload]
-//       };
-//     case ShoppingListActions.UPDATE_INGREDIENT:
-//       const ingredient = state.ingredients[state.editedIngredientIndex];
-//       const updatedIngredient = {
-//         ...ingredient,
-//         ...action.payload
-//       };
-//       const updatedIngredients = [...state.ingredients];
-//       updatedIngredients[state.editedIngredientIndex] = updatedIngredient;
-//       return {
-//         ...state,
-//         ingredients: updatedIngredients,
-//         editedIngredient: null,
-//         editedIngredientIndex: -1
-//       };
-//     case ShoppingListActions.DELETE_INGREDIENT:
-//       return {
-//         ...state,
-//         ingredients: state.ingredients.filter((i, index) => {
-//           return index !== state.editedIngredientIndex;
-//         }),
-//         editedIngredient: null,
-//         editedIngredientIndex: -1
-//       };
-//     case ShoppingListActions.START_EDIT:
-//       return {
-//         ...state,
-//         editedIngredient: { ...state.ingredients[action.payload] },
-//         editedIngredientIndex: action.payload
-//       };
-//     case ShoppingListActions.STOP_EDIT:
-//       return {
-//         ...state,
-//         editedIngredient: null,
-//         editedIngredientIndex: -1
-//       };
-//     default:
+  switch (action.type) {
+    case AuthActions.LOGIN :
+      const user = new User(
+        action.payload.email, 
+        action.payload.userId, 
+        action.payload.token, 
+        action.payload.expirationDate);
+      return {
+        ...state,
+        user: user
+      };
+    case AuthActions.LOGOUT :
+      return {
+        ...state,
+        user: null
+      };
+    default:
       return state;
-//   }
+  }
 }
