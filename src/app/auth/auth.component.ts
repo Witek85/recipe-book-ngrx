@@ -15,6 +15,7 @@ import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
 import * as FromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
+import { Actions } from '@ngrx/effects';
 
 @Component({
   selector: 'app-auth',
@@ -56,7 +57,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     const email = form.value.email;
     const password = form.value.password;
 
-    let authObs: Observable<AuthResponseData>;
+    // let authObs: Observable<AuthResponseData>;
 
     this.isLoading = true;
 
@@ -67,7 +68,11 @@ export class AuthComponent implements OnInit, OnDestroy {
         password: password
       }))
     } else {
-      authObs = this.authService.signup(email, password);
+      this.store.dispatch(new AuthActions.SignUpStart({
+        email: email,
+        password: password
+      }))
+      // authObs = this.authService.signup(email, password);
     }
 
 
