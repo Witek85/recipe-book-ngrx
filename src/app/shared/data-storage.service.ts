@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
 import * as fromApp from '../store/app.reducer';
-import * as recipesActions from '../recipes/store/recipe.actions';
+import * as RecipesActions from '../recipes/store/recipe.actions';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -43,7 +43,7 @@ export class DataStorageService {
           });
         }),
         tap(recipes => {
-          this.store.dispatch(new recipesActions.SetRecipes(recipes));
+          this.store.dispatch(new RecipesActions.SetRecipes(recipes));
           // this.recipeService.setRecipes(recipes);
         })
       );
