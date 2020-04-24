@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import * as fromApp from './store/app.reducer'
 import { AuthEffects } from './auth/store/auth.effects';
+import { RecipesEffects } from './recipes/store/recipe.effects';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -22,7 +23,7 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipesEffects]),
     StoreDevtoolsModule.instrument({logOnly: environment.production}),
     StoreRouterConnectingModule.forRoot(),
     SharedModule,
